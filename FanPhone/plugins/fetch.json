@@ -1,0 +1,11 @@
+{
+    "com.phonegap.plugins.twilioclient": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jefflinwood/twilio_client_phonegap.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}
