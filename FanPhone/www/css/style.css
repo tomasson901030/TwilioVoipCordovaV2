@@ -1,0 +1,15 @@
+/* Empty. Add your own CSS if you like */
+.scroll-container	{
+   width: 2600px;
+   height: 1000px;
+   background: url('../img/ionic.png') no-repeat
+}
+
+.call_fler_label {
+	color: white;
+}
+
+.call_fler_item {
+	background-color: transparent;;
+	border: 0px solid;
+}
