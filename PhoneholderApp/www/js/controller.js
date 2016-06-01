@@ -7,6 +7,7 @@ controllers.controller('MainCtrl', function($scope, $state, UserService, $ionicL
 	$scope.incoming_connections = [];
   $scope.current_connection = "";
   $scope.current_connected = false;
+  $scope.current_caller_id = "";
 
 	$scope.initialize = function() {
     $scope.get_caller_list();
@@ -48,10 +49,10 @@ controllers.controller('MainCtrl', function($scope, $state, UserService, $ionicL
 	$scope.call_accept = function (index) {
     // alert("call_accept called. for index: " + index);
     var caller = $scope.callers[index];
-    var caller_id = caller['user_id'];
+    $scope.current_caller_id = caller['user_id'];
     // alert(caller_id);
 
-    Twilio.Device.connect({"ToClient" : caller_id});
+    Twilio.Device.connect({"ToClient" : $scope.current_caller_id});
     $scope.openModal();
     document.getElementById('call_modal_title').innerText = "Connecting...";
     // $scope.trackConnection();
@@ -102,15 +103,15 @@ controllers.controller('MainCtrl', function($scope, $state, UserService, $ionicL
   }
 
   $scope.onaccept = function() {
-    //alert("Connection accepted");
+    alert("Connection accepted. To: " + $scope.current_caller_id);
     $scope.current_connected = true;
     document.getElementById('call_modal_title').innerText = "Connected";
     var request = $http({
       method: "GET",
-      url: serverContextPath + '/accept_call/' + caller_id
+      url: serverContextPath + '/accept_call/' + $scope.current_caller_id
     });
     request.success(function(data) {
-      //alert("accept call succeed");
+      alert("accept call succeed");
     });
     request.error(function(error) {
       alert("error" + error);
